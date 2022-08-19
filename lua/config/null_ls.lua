@@ -1,12 +1,13 @@
 local null_ls = require("null-ls")
-local prettier = require("prettier")
+
+--local prettier = require("prettier")
 
 require("null-ls").setup({
-   sources = {
-      require("null-ls").builtins.formatting.stylua,
-   },
+  sources = {
+    require("null-ls").builtins.formatting.stylua,
+  },
 })
-
+--[[
 prettier.setup({
    bin = "prettierd", -- or `prettierd`
    filetypes = {
@@ -43,3 +44,4 @@ prettier.setup({
    use_tabs = false,
    vue_indent_script_and_style = false,
 })
+]]
