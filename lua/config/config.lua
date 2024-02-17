@@ -1,12 +1,22 @@
-local modules = {'whichkey','null_ls','telescope','trouble', 'lspsaga', 'nvimtree', 'lualine', 'bufferline',
+local modules = {
+  -- 'whichkey',
+  -- 'null_ls',
+  'telescope',
+  -- 'trouble', 
+  'lspsaga',
+  'nvimtree',
+  'lualine',
+  'bufferline',
   'autopair',
   'smoothscrolling',
-  'betterescape',
+  -- 'betterescape',
   'cmp',
   'indent',
+  'debug',
   'dashboard',
   'dressing',
-  'session'}
+  -- 'session'
+}
 
 for _,j in pairs(modules) do
 	require("config/"..j)

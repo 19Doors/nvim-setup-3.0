@@ -1,112 +1,84 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
+plugins = {
 
--- Only required if you have packer configured as `opt`
-vim.cmd([[packadd packer.nvim]])
+  -- == File Explorer | Smooth Scrolling ==
 
-return require("packer").startup(function()
-  -- Packer can manage itself
-  use("wbthomason/packer.nvim")
-
-  use("lewis6991/impatient.nvim")
-
-  -- Theme
-  use({ "decaycs/decay.nvim", as = "decay" })
-
-  -- DashBoard
-  use({ "glepnir/dashboard-nvim" })
-
-  -- Session Manager
-  use("Shatur/neovim-session-manager") use({ "stevearc/dressing.nvim" })
-
-  -- Indent
-  use("lukas-reineke/indent-blankline.nvim")
-
-  -- AutoPairs With Rainbox
-  use({ "windwp/nvim-autopairs" })
-  use("mrjones2014/smart-splits.nvim")
-
-  -- WhichKey
-  use({
-    "folke/which-key.nvim",
-  })
-
-  -- Null_ls
-  use("jose-elias-alvarez/null-ls.nvim")
-  --  use("MunifTanjim/prettier.nvim")
-
-  -- Trouble
-  use({
-    "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-  })
-
-  -- BufferLine
-  use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
-
-  -- LuaLine
-  use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
-
-  -- NvimTree
-  use({
+  {
     "nvim-tree/nvim-tree.lua",
-    requires = {
-      "nvim-tree/nvim-web-devicons", -- optional, for file icons
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
     },
-    tag = "nightly", -- optional, updated every week. (see issue #1193)
-  })
+  },
 
-  -- TreeSitter
-  use({ "nvim-treesitter/nvim-treesitter" })
+  {"stevearc/dressing.nvim", lazy=true, event='VeryLazy'},
 
-  use({ "michaelb/sniprun", run = "bash ./install.sh" })
+  {
+    'nvim-telescope/telescope.nvim', tag = '0.1.5',
+  -- or                              , branch = '0.1.x',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+  },
 
-  -- Org Mode
-  use({
-    "nvim-orgmode/orgmode",
-  })
-  use({
-    "akinsho/org-bullets.nvim",
-    config = function()
-      require("org-bullets").setup()
-    end,
-  })
-  use({
-    "lukas-reineke/headlines.nvim",
-  })
+  {"declancm/cinnamon.nvim"},
 
-  -- Smooth Scrolling
-  use("declancm/cinnamon.nvim")
+  -- == Status Line | Bufferline | Indentation | Autopair ==
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' }
+  },
+  {
+    'akinsho/bufferline.nvim',
+    version = "*",
+    dependencies = 'nvim-tree/nvim-web-devicons'
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+  },
 
-  -- BetterEscape
-  use({ "max397574/better-escape.nvim" })
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+  },
+  -- == LSP | Trouble | Debugger ==
 
-  -- Telescope
-  use({
-    "nvim-telescope/telescope.nvim",
-    tag = "0.1.x",
-    requires = { { "nvim-lua/plenary.nvim" } },
-  })
+  {"williamboman/mason.nvim", lazy=true},
+  {"neovim/nvim-lspconfig"},
+  {"nvimdev/lspsaga.nvim"},
 
-  use({ "williamboman/nvim-lsp-installer", "neovim/nvim-lspconfig" })
-  --
-  -- Comments
-  use({'numToStr/Comment.nvim'})
-  -- LspSaga
-  --
-  use ({
-      'nvimdev/lspsaga.nvim',
-      --after = 'nvim-lspconfig',
-  })
---  use({
---    "glepnir/lspsaga.nvim",
---    branch = "main",
---  })
+  {
+   "folke/trouble.nvim",
+   dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
 
-  -- CMP
-  use("onsails/lspkind.nvim")
-  use("L3MON4D3/LuaSnip")
-  use("19Doors/friendly-snippets")
-  use({ "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "hrsh7th/cmp-cmdline", "hrsh7th/nvim-cmp" })
-  use { 'saadparwaiz1/cmp_luasnip' }
+  {"mfussenegger/nvim-dap", lazy=true},
+  {"rcarriga/nvim-dap-ui",lazy=true},
 
-end)
+  -- == Completion ==
+
+  {"onsails/lspkind.nvim"},
+  {"L3MON4D3/LuaSnip", lazy=true},
+  {"saadparwaiz1/cmp_luasnip"},
+  {"19Doors/friendly-snippets"},
+  {"hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "hrsh7th/cmp-cmdline", "hrsh7th/nvim-cmp"},
+
+  -- === Comments ===
+
+  {
+    'numToStr/Comment.nvim',
+    lazy = false,
+  },
+
+  -- == Startup ==
+
+  -- Dashboard
+  {
+    'nvimdev/dashboard-nvim',
+    event = 'VimEnter',
+    dependencies = { {'nvim-tree/nvim-web-devicons'}}
+  },
+
+  -- == Colorscheme == 
+  {"decaycs/decay.nvim", as = "decay"},
+  {"nvim-treesitter/nvim-treesitter"},
+}

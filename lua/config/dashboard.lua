@@ -1,15 +1,16 @@
 local home = os.getenv('HOME')
 local db = require('dashboard')
 
-db.custom_header = {
+local custom_header = {
   " ██╗ █████╗ ██████╗  ██████╗  ██████╗ ██████╗ ███████╗",
   " ███║██╔══██╗██╔══██╗██╔═══██╗██╔═══██╗██╔══██╗██╔════╝",
-  "╚██║╚██████║██║  ██║██║   ██║██║   ██║██████╔╝███████╗",
+  " ╚██║╚██████║██║  ██║██║   ██║██║   ██║██████╔╝███████╗",
   "  ██║ ╚═══██║██║  ██║██║   ██║██║   ██║██╔══██╗╚════██║",
   "  ██║ █████╔╝██████╔╝╚██████╔╝╚██████╔╝██║  ██║███████║",
   "  ╚═╝ ╚════╝ ╚═════╝  ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝",
   "",
 }
+
 db.custom_center = {
       {icon = '  ',
       desc = 'Recently latest session                 ',
@@ -36,6 +37,23 @@ db.custom_center = {
       action = 'Telescope dotfiles path=' .. home ..'/.dotfiles',
       shortcut = 'SPC f d'},
 }
+
+require('dashboard').setup {
+  hide = {
+  },
+  config = {
+    shortcut = {
+      { desc = "[sakaar srivastava]", },
+    },
+    -- mru = { limit = 10, icon = 'your icon', label = '', cwd_only = false },
+    footer = {""},
+    header = custom_header,
+    -- week_header = {
+    --   enable = true,
+    -- }
+  },
+}
+
 
 vim.cmd([[
 highlight DashboardHeader guifg=#7DDAC5
